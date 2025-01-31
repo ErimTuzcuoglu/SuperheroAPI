@@ -1,73 +1,149 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Humble Superhero API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Overview
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+The **Humble Superhero API** is a simple yet powerful backend service that allows users to add superheroes with their respective names, superpowers, and humility scores. The API provides endpoints to store and retrieve superheroes sorted by their humility scores.
 
-## Description
+## Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Add a superhero with their **name**, **superpower**, and **humility score**.
+- Fetch a list of superheroes sorted by humility score (descending order).
+- Basic validation to ensure the humility score is between 1 and 10.
+- Unit tests for core functionality.
+
+## Technologies Used
+
+- **Backend:** NestJS (Fastify Platform)
+- **Language:** TypeScript
+- **Validation:** `class-validator`
+- **Testing:** Jest, Supertest
+- **API Documentation:** Swagger
+
+## Project Structure
+
+```
+/src
+  /config
+  /modules
+    /shared
+    /...
+  /persistence
+app.modules.ts
+main.ts
+```
 
 ## Installation
 
-```bash
-$ npm install
+1. Clone the repository:
+
+   ```sh
+   git clone https://github.com/ErimTuzcuoglu/SuperheroAPI.git
+   cd superhero-api
+   ```
+
+2. Install dependencies:
+
+   ```sh
+   yarn
+   ```
+
+3. Start the development server:
+   ```sh
+   yarn start:dev
+   ```
+
+## API Endpoints
+
+### Add a Superhero
+
+**Endpoint:** `POST /api/superheroes`
+
+**Request Body:**
+
+```json
+{
+  "name": "Superman",
+  "superpower": "Flying",
+  "humilityScore": 8
+}
 ```
 
-## Running the app
+**Response:**
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```json
+{
+  "errors": [],
+  "succeeded": true,
+  "data": {
+    "name": "Superman",
+    "superpower": "Flying",
+    "humilityScore": 8,
+    "id": "059cb213-000a-455d-a568-3530c8356bcc",
+    "createdAt": "1738327045244"
+  },
+  "message": ""
+}
 ```
 
-## Test
+### Get Superheroes (Sorted by Humility Score)
 
-```bash
-# unit tests
-$ npm run test
+**Endpoint:** `GET /api/superheroes`
 
-# e2e tests
-$ npm run test:e2e
+**Response:**
 
-# test coverage
-$ npm run test:cov
+```json
+{
+  "errors": [],
+  "succeeded": true,
+  "data": [
+    {
+      "name": "Superman",
+      "superpower": "Flying",
+      "humilityScore": 8
+      "id": "059cb213-000a-455d-a568-3530c8356bcc",
+      "createdAt": "1738327045244"
+    }
+  ],
+  "message": ""
+}
+
 ```
 
-## Support
+## Testing
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Run unit tests using:
 
-## Stay in touch
+```sh
+yarn test
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Run end-to-end tests using:
 
-## License
+```sh
+yarn test:e2e
+```
 
-Nest is [MIT licensed](LICENSE).
+## Collaboration
+
+If working in a team:
+
+- Use **GitHub Issues** for tracking tasks and bugs.
+- Follow **feature branching** and **pull request** workflows.
+- Use **code reviews** for quality assurance.
+
+## If I Had More Time
+
+- Implement a **persistent database** using PostgreSQL and Prisma ORM.
+- Add user module and **authentication**.
+- **Docker**ize app.
+
+## Submission
+
+To submit your solution:
+
+- Push your code to a GitHub repository.
+- Share the repository link or send a zipped file.
+
+---
+
+Thank you for your time! Looking forward to your feedback. 🚀

@@ -24,6 +24,7 @@ async function bootstrap() {
   app.useGlobalFilters(new GlobalExceptionFilter(httpAdapter));
   app.useGlobalInterceptors(new TransformInterceptor());
   app.useGlobalPipes(new ValidationPipe());
+  app.setGlobalPrefix('api');
   /* #endregion */
   app.use(helmet());
 
